@@ -26,5 +26,24 @@ impl Server {
 
     fn run( self){
         println!("Listening on {}", self.addr);
-    }
+    } 
+}
+
+
+struct Request {
+    path: String,
+    query_string: String,
+    method: Method,
+}
+
+enum Method {
+    GET,
+    DELETE,
+    POST,
+    PUT,
+    HEAD,
+    CONNECT,
+    PATCH,
+    OPTIONS,
+    TRACE,
 }
