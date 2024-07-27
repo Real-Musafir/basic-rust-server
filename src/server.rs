@@ -22,5 +22,14 @@ impl Server {
     pub fn run(self) {
         println!("Listening on {}", self.addr);
         let listener = TcpListener::bind(&self.addr).unwrap(); //here this a recoverable error bcz the bind function will just return a result and we decide how to handle it
+
+        loop {
+            match listener.accept() {
+                Ok((stream, _)) => {
+                    println!("OK");
+                }
+                Err(e) => println!("Failed to establish a connection: {}", e),
+            }
+        }
     }
 }
