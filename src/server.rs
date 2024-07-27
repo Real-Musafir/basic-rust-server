@@ -1,3 +1,4 @@
+use std::io::Read;
 use std::net::TcpListener;
 
 pub struct Server {
@@ -25,8 +26,9 @@ impl Server {
 
         loop {
             match listener.accept() {
-                Ok((stream, _)) => {
-                    println!("OK");
+                Ok((mut stream, _)) => {
+                    let mut buffer = [0; 1024];
+                    stream.read(&mut buffer);
                 }
                 Err(e) => println!("Failed to establish a connection: {}", e),
             }
