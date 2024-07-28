@@ -25,8 +25,11 @@ impl Server {
         let listener = TcpListener::bind(&self.addr).unwrap(); //here this a recoverable error bcz the bind function will just return a result and we decide how to handle it
 
         loop {
+            // When a client connects to my server via listener.accept(), a TCP stream (stream) is established to communicate between the server and the client.
             match listener.accept() {
                 Ok((mut stream, _)) => {
+                    // the buffer in this code is essential for temporarily storing data received from client connections via TCP streams.
+                    //It facilitates efficient handling of incoming data and ensures that your server can handle multiple clients concurrently without blocking on I/O operations.
                     let mut buffer = [0; 1024];
                     match stream.read(&mut buffer) {
                         Ok(_) => {
